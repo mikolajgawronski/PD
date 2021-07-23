@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "445b2b56036f4fb3c253035674db75e4",
+    "content-hash": "e532f62e23dacb0536c63fa00ac89238",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4890,6 +4890,51 @@
     ],
     "packages-dev": [
         {
+            "name": "blumilksoftware/codestyle",
+            "version": "v0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/blumilksoftware/codestyle.git",
+                "reference": "fa02efc66a576a4c2a0d592018de856a7ce0c499"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/blumilksoftware/codestyle/zipball/fa02efc66a576a4c2a0d592018de856a7ce0c499",
+                "reference": "fa02efc66a576a4c2a0d592018de856a7ce0c499",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "symplify/easy-coding-standard": "^9.3.12"
+            },
+            "require-dev": {
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Blumilk\\Codestyle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Krzysztof Rewak",
+                    "email": "krzysztof.rewak@blumilk.pl"
+                }
+            ],
+            "description": "Blumilk codestyle configurator",
+            "support": {
+                "issues": "https://github.com/blumilksoftware/codestyle/issues",
+                "source": "https://github.com/blumilksoftware/codestyle/tree/v0.4.1"
+            },
+            "time": "2021-05-18T08:19:50+00:00"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "1.4.0",
             "source": {
@@ -7338,6 +7383,60 @@
                 }
             ],
             "time": "2020-09-28T06:39:44+00:00"
+        },
+        {
+            "name": "symplify/easy-coding-standard",
+            "version": "v9.3.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symplify/easy-coding-standard.git",
+                "reference": "0a2700ce5b4cd4054261b5f4b95d4b6563401918"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symplify/easy-coding-standard/zipball/0a2700ce5b4cd4054261b5f4b95d4b6563401918",
+                "reference": "0a2700ce5b4cd4054261b5f4b95d4b6563401918",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "conflict": {
+                "friendsofphp/php-cs-fixer": "<3.0",
+                "squizlabs/php_codesniffer": "<3.6"
+            },
+            "replace": {
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "bin": [
+                "bin/ecs"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Prefixed scoped version of ECS package",
+            "support": {
+                "source": "https://github.com/symplify/easy-coding-standard/tree/v9.3.20"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-06-05T15:51:56+00:00"
         },
         {
             "name": "theseer/tokenizer",
