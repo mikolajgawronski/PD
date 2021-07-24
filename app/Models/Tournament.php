@@ -23,12 +23,12 @@ class Tournament extends Model
         "max_players",
     ];
 
-    public function game():BelongsTo
+    public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class);
     }
 
-    public function tournamentAttendants():HasMany
+    public function tournamentAttendants(): HasMany
     {
         return $this->hasMany(TournamentAttendant::class);
     }

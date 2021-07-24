@@ -19,12 +19,12 @@ class TournamentAttendant extends Model
         "user_id",
     ];
 
-    public function tournament():BelongsTo
+    public function tournament(): BelongsTo
     {
         return $this->belongsTo(Tournament::class);
     }
 
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

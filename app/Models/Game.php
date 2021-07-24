@@ -25,12 +25,12 @@ class Game extends Model
         "available",
     ];
 
-    public function tournament():HasMany
+    public function tournament(): HasMany
     {
         return $this->hasMany(Tournament::class);
     }
 
-    public function room():HasMany
+    public function room(): HasMany
     {
         return $this->hasMany(Room::class);
     }

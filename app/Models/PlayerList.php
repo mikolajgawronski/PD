@@ -20,12 +20,12 @@ class PlayerList extends Model
         "room_id",
     ];
 
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function room():BelongsTo
+    public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class);
     }

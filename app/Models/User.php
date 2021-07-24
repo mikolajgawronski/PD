@@ -23,7 +23,7 @@ class User extends Authenticatable
         "username",
         "email",
         "password",
-        "admin"
+        "admin",
     ];
 
     /**
@@ -45,12 +45,12 @@ class User extends Authenticatable
         "email_verified_at" => "datetime",
     ];
 
-    public function tournamentAttendant():HasMany
+    public function tournamentAttendant(): HasMany
     {
         return $this->hasMany(TournamentAttendant::class);
     }
 
-    public function playerList():HasMany
+    public function playerList(): HasMany
     {
         return $this->hasMany(PlayerList::class);
     }

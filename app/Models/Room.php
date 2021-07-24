@@ -24,17 +24,17 @@ class Room extends Model
         "play_date",
     ];
 
-    public function game():BelongsTo
+    public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class);
     }
 
-    public function meeting():BelongsTo
+    public function meeting(): BelongsTo
     {
         return $this->belongsTo(Meeting::class);
     }
 
-    public function playerList():HasMany
+    public function playerList(): HasMany
     {
         return $this->hasMany(PlayerList::class);
     }

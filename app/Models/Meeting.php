@@ -18,7 +18,7 @@ class Meeting extends Model
         "date",
     ];
 
-    public function room():HasMany
+    public function room(): HasMany
     {
         return $this->hasMany(Room::class);
     }
