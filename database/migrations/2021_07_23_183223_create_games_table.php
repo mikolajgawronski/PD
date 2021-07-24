@@ -18,8 +18,10 @@ class CreateGamesTable extends Migration
             $table->string("name");
             $table->float("rating_bgg");
             $table->float("complexity_bgg");
-            $table->string("players");
-            $table->string("time");
+            $table->integer("min_players");
+            $table->integer("max_players");
+            $table->integer("min_time");
+            $table->integer("max_time");
             $table->boolean("available");
         });
     }
