@@ -1,11 +1,12 @@
 @extends("master")
 @section("meetings")
+<h3>Najbliższe spotkania:</h3>
 <div class="table-responsive">
     <table class="table table-bordered table-sm table-striped">
         <thead>
         <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
+            <th scope="col">Data</th>
+            <th scope="col">Czas</th>
         </tr>
         </thead>
         <tbody>

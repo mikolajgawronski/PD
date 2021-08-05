@@ -16,6 +16,7 @@ class CreateGamesTable extends Migration
         Schema::create("games", function (Blueprint $table): void {
             $table->id();
             $table->string("name");
+            $table->string("box");
             $table->float("rating_bgg");
             $table->float("complexity_bgg");
             $table->integer("min_players");
