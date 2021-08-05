@@ -54,4 +54,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(PlayerList::class);
     }
+
+    public function rental(): HasMany
+    {
+        return $this->hasMany(Rental::class);
+    }
+
+    public function post(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
 }

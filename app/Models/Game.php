@@ -34,4 +34,9 @@ class Game extends Model
     {
         return $this->hasMany(Room::class);
     }
+
+    public function rental(): HasMany
+    {
+        return $this->hasMany(Rental::class);
+    }
 }
