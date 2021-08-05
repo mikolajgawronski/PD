@@ -15,7 +15,7 @@ class Meeting extends Model
     public $timestamps=false;
 
     protected $fillable = [
-        "date",
+        "date", "time",
     ];
 
     public function room(): HasMany
