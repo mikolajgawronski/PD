@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -11,7 +12,11 @@ class TournamentController extends Controller
 {
     public function index(): View
     {
-        return view("tournaments");
+        $tournaments = Tournament::query()->get();
+
+        return view("tournaments", [
+            "tournaments" => $tournaments,
+        ]);
     }
 
     public function create(): void
@@ -24,9 +29,13 @@ class TournamentController extends Controller
         //
     }
 
-    public function show($id): void
+    public function show($id): View
     {
-        //
+        $tournament = Tournament::query()->findOrFail($id)->get();
+
+        return view("tournament", [
+            "tournament" => $tournament,
+        ]);
     }
 
     public function edit($id): void

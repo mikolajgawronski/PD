@@ -24,3 +24,4 @@ $router->get("/games", [GameController::class, "index"]);
 $router->get("/games/{id}", [GameController::class, "show"]);
 
 $router->get("/tournaments", [TournamentController::class, "index"]);
+$router->get("/tournaments/{id}", [TournamentController::class, "show"]);

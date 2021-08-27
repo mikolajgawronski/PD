@@ -50,6 +50,7 @@
         @yield("games")
         @yield("game")
         @yield("tournaments")
+        @yield("tournament")
 
     </div><!-- end of .container -->
 
