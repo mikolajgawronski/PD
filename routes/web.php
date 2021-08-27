@@ -21,5 +21,6 @@ $router->get("/meetings", [MeetingController::class, "index"]);
 $router->post("/meetings", [MeetingController::class, "create"]);
 
 $router->get("/games", [GameController::class, "index"]);
+$router->get("/games/{id}", [GameController::class, "show"]);
 
 $router->get("/tournaments", [TournamentController::class, "index"]);

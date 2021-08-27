@@ -26,7 +26,7 @@
 <body id="app-layout">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Dashboard</a>
+        <a class="navbar-brand" href="/">Strona Główna</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -48,6 +48,7 @@
 
         @yield("meetings")
         @yield("games")
+        @yield("game")
         @yield("tournaments")
 
     </div><!-- end of .container -->

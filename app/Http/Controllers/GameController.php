@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -11,7 +12,11 @@ class GameController extends Controller
 {
     public function index(): View
     {
-        return view("games");
+        $games = Game::query()->get();
+
+        return view("games", [
+            "games" => $games,
+        ]);
     }
 
     public function create(): void
@@ -24,9 +29,13 @@ class GameController extends Controller
         //
     }
 
-    public function show($id): void
+    public function show($id): View
     {
-        //
+        $game = Game::query()->findOrFail($id)->get();
+
+        return view("game", [
+            "game" => $game,
+        ]);
     }
 
     public function edit($id): void
