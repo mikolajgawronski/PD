@@ -2,7 +2,7 @@
 @section("meetings")
 <h3>Najbliższe spotkania:</h3>
 <div class="table-responsive">
-    <table class="table table-bordered table-sm table-striped">
+    <table class="table table-bordered table-light">
         <thead>
         <tr>
             <th scope="col">Data</th>
