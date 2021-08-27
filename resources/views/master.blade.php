@@ -10,53 +10,32 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700&subset=latin,latin-ext" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href="{{ URL::asset("custom.css") }}" rel="stylesheet">
 
     <style>
         body {
             font-family: 'Lato';
         }
-
         .fa-btn {
             margin-right: 6px;
         }
     </style>
 </head>
+
 <body id="app-layout">
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-
-            <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
-            <!-- Branding Image -->
-            <a class="navbar-brand" href="#">
-                Strona Główna
-            </a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-            <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-                <li><a href="/about">O nas</a></li>
-                <li><a href="/meetings">Spotkania</a></li>
-                <li><a href="/games">Gry</a></li>
-                <li><a href="/tournaments">Turnieje</a></li>
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
-                <!-- Authentication Links -->
-                <li><a href="login.html">Zaloguj</a></li>
-                <li><a href="">Rejestracja</a></li>
-            </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Dashboard</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="/games">Gry</a>
+                <a class="nav-link active" aria-current="page" href="/meetings">Spotkania</a>
+                <a class="nav-link active" aria-current="page" href="tournaments">Turnieje</a>
+            </div>
         </div>
     </div>
 </nav>
@@ -70,13 +49,14 @@
         @yield("meetings")
         @yield("games")
         @yield("tournaments")
+
     </div><!-- end of .container -->
 
 </div><!-- end of wrapper -->
 
 
 <!-- Footer -->
-<footer class="site-footer">
+<footer class="site-footer bg-primary">
     <div class="container">
         <p>&copy; Mikołaj Gawroński</p>
     </div>
