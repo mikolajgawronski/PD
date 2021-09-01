@@ -47,6 +47,7 @@
     <div class="container site-content">
 
         @yield("meetings")
+        @yield("rooms")
         @yield("games")
         @yield("game")
         @yield("tournaments")

@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class GameController extends Controller
+class RoomController extends Controller
 {
-    public function index(): View
+    public function index($id): View
     {
-        $games = Game::query()->get();
+        $rooms = Room::query()->where("meeting_id", $id)->get();
 
-        return view("games.index", [
-            "games" => $games,
+        return view("rooms.index", [
+            "rooms" => $rooms,
+            "meeting_id" => $id,
         ]);
     }
 
@@ -29,13 +30,9 @@ class GameController extends Controller
         //
     }
 
-    public function show($id): View
+    public function show($id): void
     {
-        $game = Game::query()->findOrFail($id)->get();
-
-        return view("games.show", [
-            "game" => $game,
-        ]);
+        //
     }
 
     public function edit($id): void

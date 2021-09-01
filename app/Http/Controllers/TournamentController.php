@@ -14,7 +14,7 @@ class TournamentController extends Controller
     {
         $tournaments = Tournament::query()->get();
 
-        return view("tournaments", [
+        return view("tournaments.index", [
             "tournaments" => $tournaments,
         ]);
     }
@@ -33,7 +33,7 @@ class TournamentController extends Controller
     {
         $tournament = Tournament::query()->findOrFail($id)->get();
 
-        return view("tournament", [
+        return view("tournaments.show", [
             "tournament" => $tournament,
         ]);
     }

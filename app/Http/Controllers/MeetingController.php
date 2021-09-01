@@ -15,7 +15,7 @@ class MeetingController extends Controller
     {
         $meetings = Meeting::query()->whereDate("date", ">=", Carbon::now())->get();
 
-        return view("meetings", [
+        return view("meetings.index", [
             "meetings" => $meetings,
         ]);
     }
