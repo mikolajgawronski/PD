@@ -20,9 +20,15 @@ class MeetingController extends Controller
         ]);
     }
 
-    public function create(Request $request): void
+    public function create(): View
+    {
+        return view("meetings.create");
+    }
+
+    public function store(Request $request): void
     {
         $meeting = new Meeting();
+        $meeting->date = $request->date;
         $meeting->time = $request->time;
         $meeting->save();
     }
