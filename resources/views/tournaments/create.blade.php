@@ -28,7 +28,7 @@
             <div class="col-md-3">
                 <div class="form-group" >
                     <label for="name">Gra:</label>
-                    <select class="form-select" size="18" aria-label="Default select example">
+                    <select class="form-select" size="18" aria-label="Default select example" name="game_id">
                         @foreach($games as $game)
                             <option value="{{$game["id"]}}" id="game_id">{{$game["name"]}}</option>
                         @endforeach

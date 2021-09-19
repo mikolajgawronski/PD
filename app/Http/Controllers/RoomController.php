@@ -18,6 +18,7 @@ class RoomController extends Controller
 
         return view("rooms.index", [
             "rooms" => $rooms,
+            "meeting_id" => $id,
         ]);
     }
 
@@ -38,8 +39,7 @@ class RoomController extends Controller
         $room->game_id = $request->game_id;
         $room->meeting_id = $request->meeting_id;
         $room->current_players = 1;
-//        $room->max_players = Game::query()->findOrFail($request->game_id)->value("max_players");
-        $room->max_players = 4;
+        $room->max_players = Game::query()->where("id", $request->game_id)->value("max_players");
         $room->time = $request->time;
         $room->save();
     }
