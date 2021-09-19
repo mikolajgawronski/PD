@@ -53,6 +53,7 @@
         @yield("addGame")
         @yield("addMeeting")
         @yield("addTournament")
+        @yield("addRoom")
         @yield("tournaments")
         @yield("tournament")
 

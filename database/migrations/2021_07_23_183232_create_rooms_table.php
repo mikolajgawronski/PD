@@ -23,7 +23,7 @@ class CreateRoomsTable extends Migration
                 ->onDelete("cascade");
             $table->integer("current_players");
             $table->integer("max_players");
-            $table->time("play_date");
+            $table->time("time");
         });
     }
 
