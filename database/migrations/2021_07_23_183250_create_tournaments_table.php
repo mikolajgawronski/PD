@@ -22,7 +22,8 @@ class CreateTournamentsTable extends Migration
                 ->onDelete("cascade");
             $table->integer("current_players");
             $table->integer("max_players");
-            $table->dateTime("play_date");
+            $table->date("date");
+            $table->time("time");
         });
     }
 

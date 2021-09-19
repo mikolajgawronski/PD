@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,9 +21,13 @@ class RoomController extends Controller
         ]);
     }
 
-    public function create(): void
+    public function create($id): View
     {
-        //
+        $games = Game::query()->orderBy("name")->get();
+
+        return view("rooms.create", [
+            "games" => $games,
+        ]);
     }
 
     public function store(Request $request): void

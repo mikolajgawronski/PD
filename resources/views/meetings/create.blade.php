@@ -5,7 +5,7 @@
         @csrf
         <div class="row align-items-center">
              <div class="col">
-                <div>
+                <div class="col-md-2">
                     <div class="form-group" >
                         <label for="name">Data:</label>
                         <input type="date" class="form-control" id="date" name="date">

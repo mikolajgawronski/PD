@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -19,14 +20,26 @@ class TournamentController extends Controller
         ]);
     }
 
-    public function create(): void
+    public function create(): View
     {
-        //
+        $games = Game::query()->orderBy("name")->get();
+
+        return view("tournaments.create", [
+            "games" => $games,
+        ]);
     }
 
     public function store(Request $request): void
     {
-        //
+        $tournament = new Tournament();
+        $tournament->name = $request->name;
+        $tournament->description = $request->description;
+        $tournament->game_id = $request->game_id;
+        $tournament->current_players = 0;
+        $tournament->max_players = $request->max_players;
+        $tournament->date = $request->date;
+        $tournament->time = $request->time;
+        $tournament->save();
     }
 
     public function show($id): View

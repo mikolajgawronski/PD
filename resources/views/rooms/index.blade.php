@@ -11,7 +11,6 @@
                 <th scope="col">Gra</th>
                 <th scope="col">Data i Godzina</th>
                 <th scope="col">Zapisani gracze</th>
-                <th scope="col">Maksymalna ilość graczy</th>
                 <th scope="col">Akcje</th>
             </tr>
             </thead>
@@ -20,8 +19,7 @@
                 <tr>
                     <td>{{ \App\Models\Game::query()->where("id",$room['game_id'])->value("name")}}</td>
                     <td>{{ $room['play_date'] }}</td>
-                    <td>{{ $room['current_players'] }}</td>
-                    <td>{{ $room['max_players'] }}</td>
+                    <td>{{ $room['current_players'] }} / {{ $room['max_players'] }}</td>
                     <td><a class="btn btn-success">Dołącz</a></td>
                 </tr>
             @endforeach

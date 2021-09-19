@@ -34,7 +34,7 @@
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/games">Gry</a>
                 <a class="nav-link active" aria-current="page" href="/meetings">Spotkania</a>
-                <a class="nav-link active" aria-current="page" href="tournaments">Turnieje</a>
+                <a class="nav-link active" aria-current="page" href="/tournaments">Turnieje</a>
             </div>
         </div>
     </div>
@@ -52,6 +52,7 @@
         @yield("game")
         @yield("addGame")
         @yield("addMeeting")
+        @yield("addTournament")
         @yield("tournaments")
         @yield("tournament")
 
