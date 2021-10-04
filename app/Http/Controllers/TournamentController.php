@@ -29,7 +29,7 @@ class TournamentController extends Controller
         ]);
     }
 
-    public function store(Request $request): void
+    public function store(Request $request)
     {
         $tournament = new Tournament();
         $tournament->name = $request->name;
@@ -40,6 +40,8 @@ class TournamentController extends Controller
         $tournament->date = $request->date;
         $tournament->time = $request->time;
         $tournament->save();
+
+        return redirect("/tournaments")->with("message", "Pomyślnie dodano turniej.");
     }
 
     public function show($id): View
@@ -61,8 +63,10 @@ class TournamentController extends Controller
         //
     }
 
-    public function destroy($id): void
+    public function destroy($id)
     {
-        //
+        Tournament::query()->findOrFail($id)->delete();
+
+        return redirect("/tournaments")->with("message", "Pomyślnie usunięto turniej.");
     }
 }

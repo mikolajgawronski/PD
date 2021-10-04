@@ -1,5 +1,12 @@
 @extends("master")
 @section("games")
+
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+
     <h3>Nasze gry:</h3>
     <div class="table-responsive">
         <table class="table table-bordered table-light">
@@ -23,7 +30,14 @@
                     <td>{{ $game['min_time'] }}-{{ $game['max_time'] }} minut</td>
                     <td>{{ $game['rating_bgg'] }}</td>
                     <td>{{ $game['complexity_bgg'] }}</td>
-                    <td><a class="btn btn-primary" href={{url("games",$game->id)}}>Więcej</a> <a class="btn btn-success">Wypożycz</a></td>
+                    <td>
+                        <button class="btn btn-primary" href={{url("games",$game->id)}}>Więcej</button>
+                        <button class="btn btn-success">Wypożycz</button>
+                        <form method="post" action="{{route("delete.game", $game->id)}}">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Usuń</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

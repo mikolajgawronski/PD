@@ -35,14 +35,17 @@ $router->prefix("add")->group(function (Router $router): void {
 $router->prefix("meetings")->group(function (Router $router): void {
     $router->get("", [MeetingController::class, "index"]);
     $router->get("/{id}", [RoomController::class, "index"]);
+    $router->post("{id}", [MeetingController::class, "destroy"])->name("delete.meeting");
 });
 
 $router->prefix("games")->group(function (Router $router): void {
     $router->get("", [GameController::class, "index"]);
     $router->get("{id}", [GameController::class, "show"]);
+    $router->post("{id}", [GameController::class, "destroy"])->name("delete.game");
 });
 
 $router->prefix("tournaments")->group(function (Router $router): void {
     $router->get("", [TournamentController::class, "index"]);
     $router->get("{id}", [TournamentController::class, "show"]);
+    $router->post("{id}", [TournamentController::class, "destroy"])->name("delete.tournament");
 });

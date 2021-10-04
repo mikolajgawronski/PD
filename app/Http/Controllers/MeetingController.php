@@ -25,16 +25,20 @@ class MeetingController extends Controller
         return view("meetings.create");
     }
 
-    public function store(Request $request): void
+    public function store(Request $request)
     {
         $meeting = new Meeting();
         $meeting->date = $request->date;
         $meeting->time = $request->time;
         $meeting->save();
+
+        return redirect("/meetings")->with("message", "Pomyślnie dodano spotkanie.");
     }
 
-    public function destroy($id): void
+    public function destroy($id)
     {
-        //
+        Meeting::query()->findOrFail($id)->delete();
+
+        return redirect("/meetings")->with("message", "Pomyślnie usunięto spotkanie.");
     }
 }

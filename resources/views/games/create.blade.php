@@ -1,5 +1,12 @@
 @extends("master")
 @section("addGame")
+
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+
 <div class="container">
     <form method="post" action="{{route("store.game")}}">
         @csrf

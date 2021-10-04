@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Game;
-use Illuminate\Http\Request;
+use App\Http\Requests\GameRequest;
 use Illuminate\View\View;
 
 class GameController extends Controller
@@ -24,7 +24,7 @@ class GameController extends Controller
         return view("games.create");
     }
 
-    public function store(Request $request): void
+    public function store(GameRequest $request)
     {
         $game = new Game();
         $game->name = $request->name;
@@ -38,6 +38,8 @@ class GameController extends Controller
         $game->max_time = $request->max_time;
         $game->available = true;
         $game->save();
+
+        return redirect("/games")->with("message", "Pomyślnie dodano grę.");
     }
 
     public function show($id): View
@@ -59,8 +61,10 @@ class GameController extends Controller
         //
     }
 
-    public function destroy($id): void
+    public function destroy($id)
     {
-        //
+        Game::query()->findOrFail($id)->delete();
+
+        return redirect("/games")->with("message", "Pomyślnie usunięto grę.");
     }
 }
