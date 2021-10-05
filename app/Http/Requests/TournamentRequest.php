@@ -6,7 +6,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GameRequest extends FormRequest
+class TournamentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,19 +27,21 @@ class GameRequest extends FormRequest
     {
         return [
             "name" => "required",
-            "box" => "required",
-            "min_players" => "required|min:1",
-            "max_players" => "required||gt:min_players",
-            "min_time" => "required|min:1",
-            "max_time" => "required|gt:min_time",
+            "game_id" => "required",
+            "max_players" => "required",
+            "date" => "required",
+            "time" => "required",
         ];
     }
 
     public function messages()
     {
         return [
-            "name.required" => "Wymagana nazwa gry",
-            "box.required" => "Wymagany numer kartonu",
+            "name.required" => "Wymagana nazwa turnieju",
+            "game_id.required" => "Należy wybrać grę",
+            "max_players.required" => "Wymagana maksymalna liczba graczy",
+            "date.required" => "Wymagana data turnieju",
+            "time.required" => "Wymagana godzina rozpoczęcia turnieju",
         ];
     }
 }

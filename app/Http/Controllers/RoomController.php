@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoomRequest;
 use App\Models\Game;
 use App\Models\Meeting;
 use App\Models\Room;
@@ -33,7 +34,7 @@ class RoomController extends Controller
         ]);
     }
 
-    public function store(Request $request): void
+    public function store(RoomRequest $request)
     {
         $room = new Room();
         $room->game_id = $request->game_id;
@@ -42,6 +43,8 @@ class RoomController extends Controller
         $room->max_players = Game::query()->where("id", $request->game_id)->value("max_players");
         $room->time = $request->time;
         $room->save();
+
+        return redirect("/meetings/{$request->meeting_id}")->with("message", "Pomyślnie dodano pokój.");
     }
 
     public function show($id): void

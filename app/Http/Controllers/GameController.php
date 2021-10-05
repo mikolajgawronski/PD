@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
 use App\Http\Requests\GameRequest;
+use App\Models\Game;
 use Illuminate\View\View;
 
 class GameController extends Controller

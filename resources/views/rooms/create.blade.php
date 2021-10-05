@@ -1,6 +1,9 @@
 @extends("master")
 @section("addRoom")
     <div class="container">
+
+        @include('message')
+
         <form method="post" action="{{route("store.room")}}">
             @csrf
             <div class="row align-items-center">

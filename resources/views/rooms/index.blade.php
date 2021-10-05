@@ -2,6 +2,8 @@
 @section("rooms")
     <div class="table-responsive">
 
+        @include('message')
+
         <h1>Pokoje gier:</h1>
         <h5>{{\App\Models\Meeting::query()->where("id",$meeting_id)->value("date")}}</h5>
         <br>

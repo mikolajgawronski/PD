@@ -16,10 +16,10 @@ class CreateGamesTable extends Migration
         Schema::create("games", function (Blueprint $table): void {
             $table->id();
             $table->string("name");
-            $table->longText("description");
+            $table->longText("description")->nullable();
             $table->string("box");
-            $table->float("rating_bgg");
-            $table->float("complexity_bgg");
+            $table->float("rating_bgg")->nullable();
+            $table->float("complexity_bgg")->nullable();
             $table->integer("min_players");
             $table->integer("max_players");
             $table->integer("min_time");

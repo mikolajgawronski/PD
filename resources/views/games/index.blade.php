@@ -1,11 +1,7 @@
 @extends("master")
 @section("games")
 
-    @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-    @endif
+    @include('message')
 
     <h3>Nasze gry:</h3>
     <div class="table-responsive">

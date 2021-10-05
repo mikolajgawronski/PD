@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MeetingRequest;
 use App\Models\Meeting;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class MeetingController extends Controller
@@ -25,11 +25,12 @@ class MeetingController extends Controller
         return view("meetings.create");
     }
 
-    public function store(Request $request)
+    public function store(MeetingRequest $request)
     {
         $meeting = new Meeting();
         $meeting->date = $request->date;
-        $meeting->time = $request->time;
+        $meeting->start_time = $request->start_time;
+        $meeting->end_time = $request->end_time;
         $meeting->save();
 
         return redirect("/meetings")->with("message", "Pomyślnie dodano spotkanie.");

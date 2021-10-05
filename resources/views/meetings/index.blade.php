@@ -1,11 +1,7 @@
 @extends("master")
 @section("meetings")
 
-    @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-    @endif
+    @include('message')
 
     <h3>Najbliższe spotkania:</h3>
     <div class="table-responsive">
@@ -13,7 +9,8 @@
             <thead>
            <tr>
               <th scope="col">Data</th>
-              <th scope="col">Czas</th>
+              <th scope="col">Godzina Rozpoczęcia</th>
+              <th scope="col">Godzina Zakończenia</th>
               <th scope="col">Akcje</th>
           </tr>
          </thead>
@@ -21,7 +18,8 @@
          @foreach($meetings as $meeting)
             <tr>
                 <td>{{ $meeting['date'] }}</td>
-                <td>{{ $meeting['time'] }}</td>
+                <td>{{ $meeting['start_time'] }}</td>
+                <td>{{ $meeting['end_time'] }}</td>
                 <td><a class="btn btn-primary" href={{url("meetings",$meeting->id)}}>Pokoje Gier</a>
                     <form method="post" action="{{route("delete.meeting", $meeting->id)}}">
                         @csrf

@@ -1,6 +1,9 @@
 @extends("master")
 @section("addTournament")
 <div class="container">
+
+    @include('message')
+
     <form method="post" action="{{route("store.tournament")}}">
         @csrf
         <div class="row align-items-center">

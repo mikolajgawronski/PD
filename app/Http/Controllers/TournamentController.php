@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TournamentRequest;
 use App\Models\Game;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class TournamentController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(TournamentRequest $request)
     {
         $tournament = new Tournament();
         $tournament->name = $request->name;
