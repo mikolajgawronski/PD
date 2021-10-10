@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TournamentController;
 use Illuminate\Routing\Router;
@@ -13,6 +14,7 @@ use Illuminate\Routing\Router;
 $router = app()->make(Router::class);
 
 $router->get("/", fn() => view("welcome"));
+$router->get("/about", fn() => view("about"));
 
 Auth::routes();
 
@@ -27,6 +29,9 @@ $router->prefix("add")->group(function (Router $router): void {
 
     $router->get("game", [GameController::class, "create"]);
     $router->post("game", [GameController::class, "store"])->name("store.game");
+
+    $router->get("post", [PostController::class, "create"]);
+    $router->post("post", [PostController::class, "store"])->name("store.post");
 
     $router->get("tournament", [TournamentController::class, "create"]);
     $router->post("tournament", [TournamentController::class, "store"])->name("store.tournament");
@@ -48,4 +53,9 @@ $router->prefix("tournaments")->group(function (Router $router): void {
     $router->get("", [TournamentController::class, "index"]);
     $router->get("{id}", [TournamentController::class, "show"]);
     $router->post("{id}", [TournamentController::class, "destroy"])->name("delete.tournament");
+});
+
+$router->prefix("posts")->group(function (Router $router): void {
+    $router->get("", [PostController::class, "index"]);
+    $router->get("{id}", [PostController::class, "show"]);
 });

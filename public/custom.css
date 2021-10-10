@@ -46,7 +46,7 @@ a, .btn-link {
 .site-footer {
     background-color: #3F51B5;
     height: 80px;
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
 }

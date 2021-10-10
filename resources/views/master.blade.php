@@ -26,12 +26,14 @@
 <body id="app-layout">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Strona Główna</a>
+        <a class="navbar-brand" href="/">Bastion Głogów</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="/posts">Aktualności</a>
+                <a class="nav-link active" aria-current="page" href="/about">O nas</a>
                 <a class="nav-link active" aria-current="page" href="/games">Gry</a>
                 <a class="nav-link active" aria-current="page" href="/meetings">Spotkania</a>
                 <a class="nav-link active" aria-current="page" href="/tournaments">Turnieje</a>
@@ -49,6 +51,8 @@
         @yield("meetings")
         @yield("rooms")
         @yield("games")
+        @yield("post")
+        @yield("posts")
         @yield("game")
         @yield("addGame")
         @yield("addMeeting")
@@ -56,18 +60,11 @@
         @yield("addRoom")
         @yield("tournaments")
         @yield("tournament")
+        @yield("about")
 
     </div><!-- end of .container -->
 
 </div><!-- end of wrapper -->
-
-
-<!-- Footer -->
-<footer class="site-footer bg-primary">
-    <div class="container">
-        <p>&copy; Mikołaj Gawroński</p>
-    </div>
-</footer>
 
 
 <!-- JavaScripts -->
