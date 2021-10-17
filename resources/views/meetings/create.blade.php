@@ -3,6 +3,7 @@
 <div class="container">
 
     @include('message')
+    @include('errors')
 
     <form method="post" action="{{route("store.meeting")}}">
         @csrf

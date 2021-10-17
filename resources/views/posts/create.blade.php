@@ -2,10 +2,7 @@
 @section("addGame")
 
     @include('message')
-
-    @if($errors->first())
-        <div class="alert alert-danger">{{$errors->first()}}</div>
-    @endif
+    @include('errors')
 
 <div class="container">
     <form method="post" action="{{route("store.post")}}">
