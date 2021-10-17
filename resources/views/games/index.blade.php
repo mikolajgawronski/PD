@@ -27,12 +27,15 @@
                     <td>{{ $game['rating_bgg'] }}</td>
                     <td>{{ $game['complexity_bgg'] }}</td>
                     <td>
-                        <button class="btn btn-primary" href={{url("games",$game->id)}}>Więcej</button>
-                        <button class="btn btn-success">Wypożycz</button>
-                        <form method="post" action="{{route("delete.game", $game->id)}}">
-                            @csrf
-                            <button type="submit" class="btn btn-danger">Usuń</button>
-                        </form>
+                        <div class="d-flex gap-2">
+                            <a class="btn btn-primary" href="/games/{{$game->id}}">Więcej</a>
+
+                            <a class="btn btn-success">Wypożycz</a>
+                            <form method="post" action="{{route("delete.game", $game->id)}}">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Usuń</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach

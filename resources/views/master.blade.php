@@ -17,16 +17,13 @@
         body {
             font-family: 'Lato';
         }
-        .fa-btn {
-            margin-right: 6px;
-        }
     </style>
 </head>
 
 <body id="app-layout">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Bastion Głogów</a>
+        <a class="navbar-brand" href="/posts">Bastion Głogów</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,6 +34,32 @@
                 <a class="nav-link active" aria-current="page" href="/games">Gry</a>
                 <a class="nav-link active" aria-current="page" href="/meetings">Spotkania</a>
                 <a class="nav-link active" aria-current="page" href="/tournaments">Turnieje</a>
+
+                <div class="d-flex align-items-end">
+                @auth
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdownMenuLink" class="nav-link dropdown-toggle text-white" href="#" role="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::user()->username }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('home') }}">
+                                Zarządzaj
+                            </a>
+
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                Wyloguj
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endauth
+                </div>
             </div>
         </div>
     </div>
@@ -68,7 +91,6 @@
 
 
 <!-- JavaScripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
