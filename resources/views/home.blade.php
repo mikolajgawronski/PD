@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Profil użytkownika') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -15,7 +15,11 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                        Witaj {{  Auth::user()->username }}!
+
+                        @include("rentals")
+                        <br>
+                        @include("contestants")
 
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
