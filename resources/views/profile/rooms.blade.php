@@ -1,18 +1,20 @@
 @include('message')
 
-    <h3>Turnieje na które jesteś zapisany:</h3>
+    <h3>Pokoje do których dołaczyłeś:</h3>
     <div class="table-responsive">
         <table class="table table-bordered table-light">
             <thead>
             <tr>
                 <th scope="col">Gra</th>
+                <th scope="col">Godzina</th>
+                <th scope="col">Data</th>
                 <th scope="col">Akcje</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($tournaments as $tournament)
+            @foreach($rooms as $room)
                 <tr>
-                    <td>{{ $tournament['id'] }}</td>
+                    <td>{{ $room['id'] }}</td>
                     <td>
                         <div class="d-flex gap-2">
 {{--                            <a class="btn btn-primary" href="/games/{{$game->id}}">Więcej</a>--}}

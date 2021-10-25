@@ -6,18 +6,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GameRequest;
 use App\Models\Game;
+use App\Models\PlayerList;
 use App\Models\Rental;
 use App\Models\TournamentAttendant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
-class AccountController extends Controller
+class ProfileController extends Controller
 {
     public function index(): View
     {
         $userId = Auth::user()->id;
         $rentals = Rental::query()->where("user_id", $userId)->get();
         $tournaments = TournamentAttendant::query()->where("user_id", $userId)->get();
+        $rooms = PlayerList::query()->where("user_id", $userId)->get();
         //player_lists potem to wyświetlić ifami poprawnie i funkcjonalność będzie zrobiona
         //no i dorobić aby przy tworzeniu pokoju dodawaly sie poprawnie rekordy itd
 
@@ -25,6 +27,7 @@ class AccountController extends Controller
             "rentals" => $rentals,
             "tournaments" => $tournaments,
             "id" => $userId,
+            "rooms" => $rooms
         ]);
     }
 

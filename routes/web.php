@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MeetingController;
@@ -16,7 +16,7 @@ $router = app()->make(Router::class);
 
 $router->get("/", fn() => view("welcome"));
 $router->get("/about", fn() => view("about"));
-$router->get("/test", [AccountController::class, "index"]);
+$router->get("/test", [ProfileController::class, "index"]);
 
 Auth::routes();
 

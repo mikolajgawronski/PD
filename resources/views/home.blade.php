@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Profil użytkownika') }}</div>
+                <div class="card-header">{{ __('Profil użytkownika') }} {{  Auth::user()->username }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -15,11 +15,11 @@
                         </div>
                     @endif
 
-                        Witaj {{  Auth::user()->username }}!
-
-                        @include("rentals")
+                        @include("profile.rentals")
                         <br>
-                        @include("contestants")
+                        @include("profile.tournaments")
+                        <br>
+                        @include("profile.rooms")
 
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
