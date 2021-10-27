@@ -18,16 +18,16 @@ class ProfileController extends Controller
     {
         $userId = Auth::user()->id;
         $rentals = Rental::query()->where("user_id", $userId)->get();
-        $tournaments = TournamentAttendant::query()->where("user_id", $userId)->get();
+        $attendants = TournamentAttendant::query()->where("user_id", $userId)->get();
         $rooms = PlayerList::query()->where("user_id", $userId)->get();
         //player_lists potem to wyświetlić ifami poprawnie i funkcjonalność będzie zrobiona
         //no i dorobić aby przy tworzeniu pokoju dodawaly sie poprawnie rekordy itd
 
         return view("home", [
             "rentals" => $rentals,
-            "tournaments" => $tournaments,
+            "attendants" => $attendants,
             "id" => $userId,
-            "rooms" => $rooms
+            "rooms" => $rooms,
         ]);
     }
 

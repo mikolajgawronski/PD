@@ -7,7 +7,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TournamentRequest;
 use App\Models\Game;
 use App\Models\Tournament;
+use App\Models\TournamentAttendant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class TournamentController extends Controller
@@ -69,5 +71,19 @@ class TournamentController extends Controller
         Tournament::query()->findOrFail($id)->delete();
 
         return redirect("/tournaments")->with("message", "Pomyślnie usunięto turniej.");
+    }
+
+    public function join($id)
+    {
+        $tournament = Tournament::query()->findOrFail($id);
+        $tournament->current_players++;
+        $tournament->save();
+
+        $attendant = new TournamentAttendant();
+        $attendant->user_id = Auth::user()->id;
+        $attendant->tournament_id = $id;
+        $attendant->save();
+
+        return redirect("/tournaments")->with("message", "Pomyślnie zapisano do turnieju.");
     }
 }

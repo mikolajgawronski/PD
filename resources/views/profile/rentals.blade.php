@@ -6,13 +6,19 @@
             <thead>
             <tr>
                 <th scope="col">Gra</th>
+                <th scope="col">Status</th>
                 <th scope="col">Akcje</th>
             </tr>
             </thead>
             <tbody>
             @foreach($rentals as $rental)
                 <tr>
-                    <td>{{ $rental['id'] }}</td>
+                    <td>{{ \App\Models\Game::query()->where("id",$rental['game_id'])->value("name") }}</td>
+                    @if ($rental["approved"] == true)
+                        <td>Wypożyczona</td>
+                    @else
+                        <td>Do odbioru w klubie</td>
+                    @endif
                     <td>
                         <div class="d-flex gap-2">
 {{--                            <a class="btn btn-primary" href="/games/{{$game->id}}">Więcej</a>--}}

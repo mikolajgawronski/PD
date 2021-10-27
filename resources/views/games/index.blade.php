@@ -29,12 +29,20 @@
                     <td>
                         <div class="d-flex gap-2">
                             <a class="btn btn-primary" href="/games/{{$game->id}}">Więcej</a>
-
-                            <a class="btn btn-success">Wypożycz</a>
-                            <form method="post" action="{{route("delete.game", $game->id)}}">
-                                @csrf
-                                <button type="submit" class="btn btn-danger">Usuń</button>
-                            </form>
+                            @if ($game['available'] == true)
+                                <form method="post" action="{{route("borrow.game", $game->id)}}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Wypożycz</button>
+                                </form>
+                            @endif
+                            @if (!Auth::user() == null)
+                                @if (Auth::user()->admin == true)
+                                    <form method="post" action="{{route("delete.game", $game->id)}}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Usuń</button>
+                                    </form>
+                                @endif
+                            @endif
                         </div>
                     </td>
                 </tr>

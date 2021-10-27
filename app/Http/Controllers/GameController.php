@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GameRequest;
 use App\Models\Game;
+use App\Models\Rental;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class GameController extends Controller
@@ -66,5 +68,20 @@ class GameController extends Controller
         Game::query()->findOrFail($id)->delete();
 
         return redirect("/games")->with("message", "Pomyślnie usunięto grę.");
+    }
+
+    public function borrow($id)
+    {
+        $game = Game::query()->findOrFail($id);
+        $game->available = false;
+        $game->save();
+
+        $rental = new Rental();
+        $rental->user_id = Auth::user()->id;
+        $rental->game_id = $game->id;
+        $rental->approved = false;
+        $rental->save();
+
+        return redirect("/games")->with("message", "Pomyślnie wypożyczono grę.");
     }
 }

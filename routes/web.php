@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GameController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TournamentController;
 use Illuminate\Routing\Router;
@@ -16,11 +15,10 @@ $router = app()->make(Router::class);
 
 $router->get("/", fn() => view("welcome"));
 $router->get("/about", fn() => view("about"));
-$router->get("/test", [ProfileController::class, "index"]);
 
 Auth::routes();
 
-$router->get("/home", [HomeController::class, "index"])->name("home");
+$router->get("/home", [ProfileController::class, "index"])->name("home");
 
 $router->prefix("add")->group(function (Router $router): void {
     $router->get("room", [RoomController::class, "create"]);
@@ -49,12 +47,14 @@ $router->prefix("games")->group(function (Router $router): void {
     $router->get("", [GameController::class, "index"]);
     $router->get("{id}", [GameController::class, "show"]);
     $router->post("{id}", [GameController::class, "destroy"])->name("delete.game");
+    $router->post("borrow/{id}", [GameController::class, "borrow"])->name("borrow.game");
 });
 
 $router->prefix("tournaments")->group(function (Router $router): void {
     $router->get("", [TournamentController::class, "index"]);
     $router->get("{id}", [TournamentController::class, "show"]);
     $router->post("{id}", [TournamentController::class, "destroy"])->name("delete.tournament");
+    $router->post("join/{id}", [TournamentController::class, "join"])->name("join.tournament");
 });
 
 $router->prefix("posts")->group(function (Router $router): void {
