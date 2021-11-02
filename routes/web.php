@@ -19,6 +19,9 @@ $router->get("/about", fn() => view("about"));
 Auth::routes();
 
 $router->get("/home", [ProfileController::class, "index"])->name("home");
+$router->post("/home/rental/{id}", [ProfileController::class, "deleteRental"])->name("delete.rental");
+$router->post("/home/attendance/{id}", [ProfileController::class, "cancelAttendance"])->name("cancel.attendance");
+$router->post("/home/room/{id}", [ProfileController::class, "cancelPlaying"])->name("cancel.playing");
 
 $router->prefix("add")->group(function (Router $router): void {
     $router->get("room", [RoomController::class, "create"]);
@@ -41,6 +44,7 @@ $router->prefix("meetings")->group(function (Router $router): void {
     $router->get("", [MeetingController::class, "index"]);
     $router->get("/{id}", [RoomController::class, "index"]);
     $router->post("{id}", [MeetingController::class, "destroy"])->name("delete.meeting");
+    $router->post("join/{id}", [RoomController::class, "join"])->name("join.room");
 });
 
 $router->prefix("games")->group(function (Router $router): void {

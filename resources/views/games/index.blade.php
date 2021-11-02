@@ -4,6 +4,14 @@
     @include('message')
 
     <h3>Nasze gry:</h3>
+    <br>
+    @if (!Auth::user() == null)
+        @if (Auth::user()->admin == true)
+        <a class="btn btn-success" href={{url("add","game")}}>Dodaj grę</a>
+        <br>
+        <br>
+        @endif
+    @endif
     <div class="table-responsive">
         <table class="table table-bordered table-light">
             <thead>

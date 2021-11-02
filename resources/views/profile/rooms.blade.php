@@ -1,5 +1,3 @@
-@include('message')
-
     <h3>Pokoje do których dołaczyłeś:</h3>
     <div class="table-responsive">
         <table class="table table-bordered table-light">
@@ -14,16 +12,17 @@
             <tbody>
             @foreach($rooms as $room)
                 <tr>
-                    <td>{{ $room['id'] }}</td>
+                    <td>{{\App\Models\Game::query()->where("id",\App\Models\Room::query()->where("id",$room['room_id'])->value("game_id"))->value("name") }}</td>
+                    <td>{{\App\Models\Room::query()->where("id",$room['room_id'])->value("time") }}</td>
+                    <td>{{\App\Models\Meeting::query()->where("id",\App\Models\Room::query()->where("id",$room['room_id'])->value("meeting_id"))->value("date") }}</td>
                     <td>
                         <div class="d-flex gap-2">
-{{--                            <a class="btn btn-primary" href="/games/{{$game->id}}">Więcej</a>--}}
+                            <a class="btn btn-primary" href={{url("rooms", $room['id'])}}>Więcej</a>
 
-{{--                            <a class="btn btn-success">Wypożycz</a>--}}
-{{--                            <form method="post" action="{{route("delete.game", $game->id)}}">--}}
-{{--                                @csrf--}}
-{{--                                <button type="submit" class="btn btn-danger">Usuń</button>--}}
-{{--                            </form>--}}
+                            <form method="post" action="{{route("cancel.playing", $room['id'])}}">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Anuluj uczestnictwo</button>
+                            </form>
                         </div>
                     </td>
                 </tr>

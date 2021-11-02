@@ -8,6 +8,8 @@ use App\Http\Requests\GameRequest;
 use App\Models\Game;
 use App\Models\PlayerList;
 use App\Models\Rental;
+use App\Models\Room;
+use App\Models\Tournament;
 use App\Models\TournamentAttendant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -20,8 +22,6 @@ class ProfileController extends Controller
         $rentals = Rental::query()->where("user_id", $userId)->get();
         $attendants = TournamentAttendant::query()->where("user_id", $userId)->get();
         $rooms = PlayerList::query()->where("user_id", $userId)->get();
-        //player_lists potem to wyświetlić ifami poprawnie i funkcjonalność będzie zrobiona
-        //no i dorobić aby przy tworzeniu pokoju dodawaly sie poprawnie rekordy itd
 
         return view("home", [
             "rentals" => $rentals,
@@ -70,5 +70,44 @@ class ProfileController extends Controller
         Game::query()->findOrFail($id)->delete();
 
         return redirect("/games")->with("message", "Pomyślnie usunięto grę.");
+    }
+
+    public function deleteRental($id)
+    {
+        $rental = Rental::query()->findOrFail($id);
+        $game = Game::query()->findOrFail($rental["game_id"]);
+
+        $game->available = true;
+        $game->save();
+
+        $rental->delete();
+
+        return redirect("/home")->with("message", "Pomyślnie anulowano wypożyczenie.");
+    }
+
+    public function cancelAttendance($id)
+    {
+        $attendant = TournamentAttendant::query()->findOrFail($id);
+        $tournament = Tournament::query()->findOrFail($attendant["tournament_id"]);
+
+        $tournament->current_players--;
+        $tournament->save();
+
+        $attendant->delete();
+
+        return redirect("/home")->with("message", "Pomyślnie anulowano uczestnictwo w turnieju.");
+    }
+
+    public function cancelPlaying($id)
+    {
+        $list = PlayerList::query()->findOrFail($id);
+        $room = Room::query()->findOrFail($list["room_id"]);
+
+        $room->current_players--;
+        $room->save();
+
+        $list->delete();
+
+        return redirect("/home")->with("message", "Pomyślnie wypisano się z pokoju.");
     }
 }

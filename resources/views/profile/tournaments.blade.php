@@ -1,6 +1,4 @@
-@include('message')
-
-    <h3>Turnieje na które jesteś zapisany:</h3>
+<h3>Turnieje na które jesteś zapisany:</h3>
     <div class="table-responsive">
         <table class="table table-bordered table-light">
             <thead>
@@ -22,13 +20,12 @@
 
                     <td>
                         <div class="d-flex gap-2">
-{{--                            <a class="btn btn-primary" href="/games/{{$game->id}}">Więcej</a>--}}
+                            <a class="btn btn-primary" href={{url("tournaments", $attendant['tournament_id'])}}>Więcej</a>
 
-{{--                            <a class="btn btn-success">Wypożycz</a>--}}
-{{--                            <form method="post" action="{{route("delete.game", $game->id)}}">--}}
-{{--                                @csrf--}}
-{{--                                <button type="submit" class="btn btn-danger">Usuń</button>--}}
-{{--                            </form>--}}
+                            <form method="post" action="{{route("cancel.attendance", $attendant['id'])}}">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Anuluj uczestnictwo</button>
+                            </form>
                         </div>
                     </td>
                 </tr>
