@@ -54,9 +54,19 @@ class RoomController extends Controller
         return redirect("/meetings/{$request->meeting_id}")->with("message", "Pomyślnie dodano pokój.");
     }
 
-    public function show($id): void
+    public function show($id): View
     {
-        //
+        $room = Room::query()->where("id", $id)->get();
+        $game = Game::query()->where("id", $room[0]->game_id)->value("name");
+        $players = PlayerList::query()->where("room_id", $id)->get();
+        $date = Meeting::query()->where("id", $room[0]->meeting_id)->value("date");
+
+        return view("rooms.show", [
+            "room" => $room,
+            "game" => $game,
+            "players" => $players,
+            "date" => $date,
+        ]);
     }
 
     public function edit($id): void

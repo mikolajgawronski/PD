@@ -23,10 +23,12 @@
                         <div class="d-flex gap-2">
                             <a class="btn btn-primary" href={{url("games", $rental['game_id'])}}>Więcej</a>
 
+                            @if ($rental["approved"] == false)
                             <form method="post" action="{{route("delete.rental", $rental['id'])}}">
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Anuluj wypożyczenie</button>
                             </form>
+                            @endif
                         </div>
                     </td>
                 </tr>

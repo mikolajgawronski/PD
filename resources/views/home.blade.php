@@ -21,6 +21,11 @@
                         <br>
                         @include("profile.rooms")
 
+                        @if(\Illuminate\Support\Facades\Auth::user()->admin == 1)
+                            <br>
+                            @include("profile.admin")
+                        @endif
+
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">

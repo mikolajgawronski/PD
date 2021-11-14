@@ -26,6 +26,7 @@
                     <td>{{ $room['time'] }}</td>
                     <td>{{ $room['current_players'] }} / {{ $room['max_players'] }}</td>
                     <td>@if (!Auth::user() == null)
+                            <a class="btn btn-primary" href={{url("rooms", $room['id'])}}>Więcej</a>
                             @if ($room['current_players'] < $room['max_players'] && !$room->checkIfJoined($room['id']))
                                 <form method="post" action="{{route("join.room", $room->id)}}">
                                     @csrf

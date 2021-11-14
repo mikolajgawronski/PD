@@ -17,7 +17,7 @@
                     <td>{{\App\Models\Meeting::query()->where("id",\App\Models\Room::query()->where("id",$room['room_id'])->value("meeting_id"))->value("date") }}</td>
                     <td>
                         <div class="d-flex gap-2">
-                            <a class="btn btn-primary" href={{url("rooms", $room['id'])}}>Więcej</a>
+                            <a class="btn btn-primary" href={{url("rooms", $room['room_id'])}}>Więcej</a>
 
                             <form method="post" action="{{route("cancel.playing", $room['id'])}}">
                                 @csrf

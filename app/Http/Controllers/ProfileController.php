@@ -22,12 +22,14 @@ class ProfileController extends Controller
         $rentals = Rental::query()->where("user_id", $userId)->get();
         $attendants = TournamentAttendant::query()->where("user_id", $userId)->get();
         $rooms = PlayerList::query()->where("user_id", $userId)->get();
+        $adminRentals = Rental::query()->get();
 
         return view("home", [
             "rentals" => $rentals,
             "attendants" => $attendants,
             "id" => $userId,
             "rooms" => $rooms,
+            "adminRentals" => $adminRentals,
         ]);
     }
 
@@ -109,5 +111,14 @@ class ProfileController extends Controller
         $list->delete();
 
         return redirect("/home")->with("message", "Pomyślnie wypisano się z pokoju.");
+    }
+
+    public function rentGame($id)
+    {
+        $rental = Rental::query()->findOrFail($id);
+        $rental->approved = true;
+        $rental->save();
+
+        return redirect("/home")->with("message", "Pomyślnie zatwierdzono wypożyczenie.");
     }
 }

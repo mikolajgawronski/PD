@@ -19,9 +19,11 @@ $router->get("/about", fn() => view("about"));
 Auth::routes();
 
 $router->get("/home", [ProfileController::class, "index"])->name("home");
-$router->post("/home/rental/{id}", [ProfileController::class, "deleteRental"])->name("delete.rental");
+$router->post("/home/rental/delete/{id}", [ProfileController::class, "deleteRental"])->name("delete.rental");
+$router->post("/home/rental/rent/{id}", [ProfileController::class, "rentGame"])->name("rent.rental");
 $router->post("/home/attendance/{id}", [ProfileController::class, "cancelAttendance"])->name("cancel.attendance");
 $router->post("/home/room/{id}", [ProfileController::class, "cancelPlaying"])->name("cancel.playing");
+$router->get("rooms/{id}", [RoomController::class, "show"]);
 
 $router->prefix("add")->group(function (Router $router): void {
     $router->get("room", [RoomController::class, "create"]);
