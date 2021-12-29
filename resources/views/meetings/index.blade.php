@@ -25,9 +25,9 @@
          <tbody>
          @foreach($meetings as $meeting)
             <tr>
-                <td>{{ $meeting['date'] }}</td>
-                <td>{{ $meeting['start_time'] }}</td>
-                <td>{{ $meeting['end_time'] }}</td>
+                <td>{{ \Carbon\Carbon::parse($meeting['date'])->format('d.m.Y') }}</td>
+                <td>{{ \Carbon\Carbon::parse($meeting['start_time'])->format('H:i') }}</td>
+                <td>{{ \Carbon\Carbon::parse($meeting['end_time'])->format('H:i') }}</td>
                 <td>
                     <div class="d-flex gap-2">
                         <a class="btn btn-primary" href={{url("meetings",$meeting->id)}}>Pokoje Gier</a>

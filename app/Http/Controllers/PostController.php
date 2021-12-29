@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index(): View
     {
-        $posts = Post::query()->get();
+        $posts = Post::query()->orderBy('date','desc')->get();
 
         return view("posts.index", [
             "posts" => $posts,
@@ -31,7 +31,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
         $post->date = Carbon::today();
-        $post->time = Carbon::now()->addHours(2);
+        $post->time = Carbon::now()->addHours(1);
         $post->save();
 
         return redirect("/posts")->with("message", "Pomyślnie dodano post.");

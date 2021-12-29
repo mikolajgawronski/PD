@@ -3,9 +3,6 @@
 
     @include('message')
 
-    <h1>Najnowsze aktualności:</h1>
-    <hr>
-    <br>
     @if (!Auth::user() == null)
         @if (Auth::user()->admin == true)
             <a class="btn btn-success" href={{url("add","post")}}>Dodaj post</a>
@@ -13,6 +10,12 @@
             <br>
         @endif
     @endif
+
+    <h1>Najnowsze aktualności:</h1>
+    <hr>
+
+    <h1>{{\Carbon\Carbon::parse(\Carbon\Carbon::now()->addHour())->format('d.m.Y, H:i:s')}}</h1>
+
     @foreach($posts as $post)
         <br>
         <h6>Dodano: {{$post["date"]}}, {{$post["time"]}}</h6>

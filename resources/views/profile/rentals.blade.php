@@ -15,7 +15,7 @@
                 <tr>
                     <td>{{ \App\Models\Game::query()->where("id",$rental['game_id'])->value("name") }}</td>
                     @if ($rental["approved"] == true)
-                        <td>Wypożyczona</td>
+                        <td>Wypożyczona do {{\Carbon\Carbon::parse($rental->rented_until)->format('d.m.Y')}}</td>
                     @else
                         <td>Do odbioru w klubie</td>
                     @endif

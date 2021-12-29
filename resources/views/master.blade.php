@@ -34,15 +34,17 @@
                 <a class="nav-link active" aria-current="page" href="/games">Gry</a>
                 <a class="nav-link active" aria-current="page" href="/meetings">Spotkania</a>
                 <a class="nav-link active" aria-current="page" href="/tournaments">Turnieje</a>
+            </div>
 
-                <div class="d-flex align-items-end">
+            <div class="collapse navbar-collapse justify-content-end">
                 @auth
-                    <li class="nav-item dropdown">
+                <div class="navbar-nav">
+                    <li class="nav-item dropdown ">
                         <a id="navbarDropdownMenuLink" class="nav-link dropdown-toggle text-white" href="#" role="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ Auth::user()->username }}
+                            {{ "Mój Profil" }}
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('home') }}">
                                 Zarządzaj
                             </a>
@@ -58,6 +60,17 @@
                             </form>
                         </div>
                     </li>
+                @else
+                    <div class="collapse navbar-collapse justify-content-end">
+                        <div class="navbar-nav">
+                            <a class="nav-link active" href="/login" role="button" role="button">
+                                {{ "Zaloguj się" }}
+                            </a>
+                            <a class="nav-link active" href="/register" role="button" role="button">
+                                {{ "Zarejestruj sie" }}
+                            </a>
+                        </div>
+                    </div>
                 @endauth
                 </div>
             </div>

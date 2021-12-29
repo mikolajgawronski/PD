@@ -22,6 +22,7 @@ class CreateRentalsTable extends Migration
             $table->foreign("game_id")->references("id")->on("games")
                 ->onDelete("cascade");
             $table->boolean("approved");
+            $table->date("rented_until")->nullable();
         });
     }
 

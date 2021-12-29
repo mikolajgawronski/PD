@@ -5,7 +5,7 @@
         @include('message')
 
         <h1>Pokoje gier:</h1>
-        <h5>{{\App\Models\Meeting::query()->where("id",$meeting_id)->value("date")}}</h5>
+        <h5>{{\Carbon\Carbon::parse(\App\Models\Meeting::query()->where("id",$meeting_id)->value("date"))->format('d.m.Y')}}</h5>
         <br>
         <a class="btn btn-success" href={{url("add","room")}}>Stwórz pokój</a>
         <br>
@@ -23,7 +23,7 @@
             @foreach($rooms as $room)
                 <tr>
                     <td>{{ \App\Models\Game::query()->where("id",$room['game_id'])->value("name")}}</td>
-                    <td>{{ $room['time'] }}</td>
+                    <td>{{ \Carbon\Carbon::parse($room['time'])->format('H:i') }}</td>
                     <td>{{ $room['current_players'] }} / {{ $room['max_players'] }}</td>
                     <td>@if (!Auth::user() == null)
                             <a class="btn btn-primary" href={{url("rooms", $room['id'])}}>Więcej</a>

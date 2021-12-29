@@ -11,6 +11,7 @@ use App\Models\Rental;
 use App\Models\Room;
 use App\Models\Tournament;
 use App\Models\TournamentAttendant;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -115,8 +116,11 @@ class ProfileController extends Controller
 
     public function rentGame($id)
     {
+        $carbon = new Carbon();
+
         $rental = Rental::query()->findOrFail($id);
         $rental->approved = true;
+        $rental->rented_until = $carbon->next("saturday");
         $rental->save();
 
         return redirect("/home")->with("message", "Pomyślnie zatwierdzono wypożyczenie.");
