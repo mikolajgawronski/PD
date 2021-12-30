@@ -9,6 +9,7 @@ use App\Models\Game;
 use App\Models\Rental;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use phpDocumentor\Reflection\Types\Array_;
 
 class GameController extends Controller
 {
@@ -38,6 +39,7 @@ class GameController extends Controller
         $game->max_players = $request->max_players;
         $game->min_time = $request->min_time;
         $game->max_time = $request->max_time;
+        $game->categories = json_encode(['karciana', 'strategiczna', 'imprezowa']);
         $game->available = true;
         $game->save();
 
@@ -46,7 +48,7 @@ class GameController extends Controller
 
     public function show($id): View
     {
-        $game = Game::query()->findOrFail($id)->get();
+        $game = Game::query()->findOrFail($id);
 
         return view("games.show", [
             "game" => $game,

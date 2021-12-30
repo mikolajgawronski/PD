@@ -24,6 +24,7 @@ class ProfileController extends Controller
         $attendants = TournamentAttendant::query()->where("user_id", $userId)->get();
         $rooms = PlayerList::query()->where("user_id", $userId)->get();
         $adminRentals = Rental::query()->get();
+        $carbon = new Carbon();
 
         return view("home", [
             "rentals" => $rentals,
@@ -31,6 +32,7 @@ class ProfileController extends Controller
             "id" => $userId,
             "rooms" => $rooms,
             "adminRentals" => $adminRentals,
+            "carbon" => $carbon,
         ]);
     }
 
@@ -120,7 +122,7 @@ class ProfileController extends Controller
 
         $rental = Rental::query()->findOrFail($id);
         $rental->approved = true;
-        $rental->rented_until = $carbon->next("saturday");
+        $rental->rented_until = $carbon->next("saturday")->addWeek();
         $rental->save();
 
         return redirect("/home")->with("message", "Pomyślnie zatwierdzono wypożyczenie.");

@@ -13,16 +13,16 @@
             <tbody>
             @foreach($attendants as $attendant)
                 <tr>
-                    <td>{{\App\Models\Tournament::query()->where("id",$attendant['tournament_id'])->value("name") }}</td>
-                    <td>{{\App\Models\Game::query()->where("id",\App\Models\Tournament::query()->where("id",$attendant['tournament_id'])->value("game_id"))->value("name") }}</td>
-                    <td>{{\App\Models\Tournament::query()->where("id",$attendant['tournament_id'])->value("time") }}</td>
-                    <td>{{\App\Models\Tournament::query()->where("id",$attendant['tournament_id'])->value("date") }}</td>
+                    <td>{{\App\Models\Tournament::query()->where("id",$attendant->tournament_id)->value("name") }}</td>
+                    <td>{{\App\Models\Game::query()->where("id",\App\Models\Tournament::query()->where("id",$attendant->tournament_id)->value("game_id"))->value("name") }}</td>
+                    <td>{{\App\Models\Tournament::query()->where("id",$attendant->tournament_id)->value("time") }}</td>
+                    <td>{{\App\Models\Tournament::query()->where("id",$attendant->tournament_id)->value("date") }}</td>
 
                     <td>
                         <div class="d-flex gap-2">
-                            <a class="btn btn-primary" href={{url("tournaments", $attendant['tournament_id'])}}>Więcej</a>
+                            <a class="btn btn-primary" href={{url("tournaments", $attendant->tournament_id)}}>Więcej</a>
 
-                            <form method="post" action="{{route("cancel.attendance", $attendant['id'])}}">
+                            <form method="post" action="{{route("cancel.attendance", $attendant->id)}}">
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Anuluj uczestnictwo</button>
                             </form>

@@ -24,6 +24,7 @@ class CreateGamesTable extends Migration
             $table->integer("max_players");
             $table->integer("min_time");
             $table->integer("max_time");
+            $table->json("categories");
             $table->boolean("available");
         });
     }

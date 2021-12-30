@@ -14,9 +14,11 @@ class MeetingController extends Controller
     public function index(): View
     {
         $meetings = Meeting::query()->whereDate("date", ">=", Carbon::now())->get();
+        $carbon = new Carbon();
 
         return view("meetings.index", [
             "meetings" => $meetings,
+            "carbon" => $carbon,
         ]);
     }
 

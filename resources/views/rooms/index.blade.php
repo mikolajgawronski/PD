@@ -5,7 +5,7 @@
         @include('message')
 
         <h1>Pokoje gier:</h1>
-        <h5>{{\Carbon\Carbon::parse(\App\Models\Meeting::query()->where("id",$meeting_id)->value("date"))->format('d.m.Y')}}</h5>
+        <h5>{{$meeting_date}}</h5>
         <br>
         <a class="btn btn-success" href={{url("add","room")}}>Stwórz pokój</a>
         <br>
@@ -22,18 +22,21 @@
             <tbody>
             @foreach($rooms as $room)
                 <tr>
-                    <td>{{ \App\Models\Game::query()->where("id",$room['game_id'])->value("name")}}</td>
-                    <td>{{ \Carbon\Carbon::parse($room['time'])->format('H:i') }}</td>
-                    <td>{{ $room['current_players'] }} / {{ $room['max_players'] }}</td>
-                    <td>@if (!Auth::user() == null)
-                            <a class="btn btn-primary" href={{url("rooms", $room['id'])}}>Więcej</a>
-                            @if ($room['current_players'] < $room['max_players'] && !$room->checkIfJoined($room['id']))
-                                <form method="post" action="{{route("join.room", $room->id)}}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success">Dołącz</button>
-                                </form>
-                            @endif
-                        @endif
+                    <td>{{ \App\Models\Game::query()->where("id",$room->game_id)->value("name")}}</td>
+                    <td>{{ $carbon->parse($room->time)->format('H:i') }}</td>
+                    <td>{{ $room->current_players }} / {{ $room->max_players }}</td>
+                    <td>
+                        @auth
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-primary" href={{url("rooms", $room->id)}}>Więcej</a>
+                                @if ($room->current_players < $room->max_players && !$room->checkIfJoined($room->id))
+                                    <form method="post" action="{{route("join.room", $room->id)}}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success">Dołącz</button>
+                                    </form>
+                                @endif
+                            </div>
+                        @endauth
                     </td>
                 </tr>
             @endforeach

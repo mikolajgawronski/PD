@@ -9,6 +9,7 @@ use App\Models\Game;
 use App\Models\Meeting;
 use App\Models\PlayerList;
 use App\Models\Room;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -17,11 +18,16 @@ class RoomController extends Controller
 {
     public function index($id): View
     {
+        $carbon = new Carbon();
         $rooms = Room::query()->where("meeting_id", $id)->get();
+
+        $meetingDate = Meeting::query()->where("id", $id)->value("date");
+        $meetingDate = $carbon->parse($meetingDate)->format("d.m.Y");
 
         return view("rooms.index", [
             "rooms" => $rooms,
-            "meeting_id" => $id,
+            "carbon" => $carbon,
+            "meeting_date" => $meetingDate,
         ]);
     }
 
@@ -56,16 +62,21 @@ class RoomController extends Controller
 
     public function show($id): View
     {
-        $room = Room::query()->where("id", $id)->get();
-        $game = Game::query()->where("id", $room[0]->game_id)->value("name");
+        $carbon = new Carbon();
+        $room = Room::query()->findOrFail($id);
+        $game = Game::query()->where("id", $room->game_id)->value("name");
         $players = PlayerList::query()->where("room_id", $id)->get();
-        $date = Meeting::query()->where("id", $room[0]->meeting_id)->value("date");
+
+        $date = Meeting::query()->where("id", $room->meeting_id)->value("date");
+        $date = $carbon->parse($date)->format("d.m.Y");
+        $time = $carbon->parse($room->time)->format("H:i");
 
         return view("rooms.show", [
             "room" => $room,
             "game" => $game,
             "players" => $players,
             "date" => $date,
+            "time" => $time,
         ]);
     }
 

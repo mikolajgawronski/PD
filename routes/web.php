@@ -13,17 +13,18 @@ use Illuminate\Routing\Router;
 /** @var Router $router */
 $router = app()->make(Router::class);
 
-$router->get("/", fn() => view("welcome"));
+$router->get("/", [PostController::class, "index"]);
 $router->get("/about", fn() => view("about"));
 
 Auth::routes();
 
-$router->get("/home", [ProfileController::class, "index"])->name("home");
-$router->post("/home/rental/delete/{id}", [ProfileController::class, "deleteRental"])->name("delete.rental");
-$router->post("/home/rental/rent/{id}", [ProfileController::class, "rentGame"])->name("rent.rental");
-$router->post("/home/attendance/{id}", [ProfileController::class, "cancelAttendance"])->name("cancel.attendance");
-$router->post("/home/room/{id}", [ProfileController::class, "cancelPlaying"])->name("cancel.playing");
-$router->get("rooms/{id}", [RoomController::class, "show"]);
+$router->prefix("home")->group(function (Router $router): void {
+    $router->get("", [ProfileController::class, "index"])->name("home");
+    $router->post("/rental/delete/{id}", [ProfileController::class, "deleteRental"])->name("delete.rental");
+    $router->post("/rental/rent/{id}", [ProfileController::class, "rentGame"])->name("rent.rental");
+    $router->post("/attendance/{id}", [ProfileController::class, "cancelAttendance"])->name("cancel.attendance");
+    $router->post("/room/{id}", [ProfileController::class, "cancelPlaying"])->name("cancel.playing");
+});
 
 $router->prefix("add")->group(function (Router $router): void {
     $router->get("room", [RoomController::class, "create"]);
@@ -66,4 +67,8 @@ $router->prefix("tournaments")->group(function (Router $router): void {
 $router->prefix("posts")->group(function (Router $router): void {
     $router->get("", [PostController::class, "index"]);
     $router->get("{id}", [PostController::class, "show"]);
+});
+
+$router->prefix("rooms")->group(function (Router $router): void {
+    $router->get("{id}", [RoomController::class, "show"]);
 });

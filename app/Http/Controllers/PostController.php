@@ -13,10 +13,12 @@ class PostController extends Controller
 {
     public function index(): View
     {
-        $posts = Post::query()->orderBy('date','desc')->get();
+        $posts = Post::query()->orderBy("datetime", "desc")->get();
+        $carbon = new Carbon();
 
         return view("posts.index", [
             "posts" => $posts,
+            "carbon" => $carbon,
         ]);
     }
 
@@ -30,8 +32,7 @@ class PostController extends Controller
         $post = new Post();
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->date = Carbon::today();
-        $post->time = Carbon::now()->addHours(1);
+        $post->datetime = Carbon::now()->addHour();
         $post->save();
 
         return redirect("/posts")->with("message", "Pomyślnie dodano post.");
@@ -39,7 +40,7 @@ class PostController extends Controller
 
     public function show($id): View
     {
-        $post = Post::query()->findOrFail($id)->get();
+        $post = Post::query()->findOrFail($id);
 
         return view("posts.show", [
             "post" => $post,
