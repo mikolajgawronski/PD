@@ -12,13 +12,13 @@
             <tbody>
             @foreach($adminRentals as $rental)
                 <tr>
-                    <td>{{ \App\Models\Game::query()->where("id", $rental->game_id)->value("name") }}</td>
+                    <td>{{ $rental->getGameName() }}</td>
                     @if ($rental->approved == true)
                         <td>Wypożyczona</td>
                     @else
                         <td>Do odbioru w klubie</td>
                     @endif
-                    <td>{{\App\Models\User::query()->where("id", $rental->user_id)->value("username")}}</td>
+                    <td>{{$rental->getUserName()}}</td>
                     <td>
                         <div class="d-flex gap-2">
                             <a class="btn btn-primary" href={{url("games", $rental->game_id)}}>Więcej</a>

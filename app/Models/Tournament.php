@@ -47,4 +47,9 @@ class Tournament extends Model
 
         return false;
     }
+
+    public function getGameName()
+    {
+        return Game::query()->where("id", $this->game_id)->value("name");
+    }
 }

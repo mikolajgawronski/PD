@@ -12,9 +12,9 @@
             <tbody>
             @foreach($rooms as $room)
                 <tr>
-                    <td>{{\App\Models\Game::query()->where("id",\App\Models\Room::query()->where("id",$room->room_id)->value("game_id"))->value("name") }}</td>
-                    <td>{{\App\Models\Room::query()->where("id",$room->room_id)->value("time") }}</td>
-                    <td>{{\App\Models\Meeting::query()->where("id",\App\Models\Room::query()->where("id",$room->room_id)->value("meeting_id"))->value("date") }}</td>
+                    <td>{{$room->getGameName()}}</td>
+                    <td>{{$carbon->parse($room->getRoomTime())->format("H:i")}}</td>
+                    <td>{{$carbon->parse($room->getMeetingDate())->format("d.m.Y")}}</td>
                     <td>
                         <div class="d-flex gap-2">
                             <a class="btn btn-primary" href={{url("rooms", $room->room_id)}}>Więcej</a>

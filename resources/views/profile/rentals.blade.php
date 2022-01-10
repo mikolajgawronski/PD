@@ -13,7 +13,7 @@
             <tbody>
             @foreach($rentals as $rental)
                 <tr>
-                    <td>{{ \App\Models\Game::query()->where("id",$rental->game_id)->value("name") }}</td>
+                    <td>{{ $rental->getGameName() }}</td>
                     @if ($rental->approved == true)
                         <td>Wypożyczona do {{$carbon->parse($rental->rented_until)->format('d.m.Y')}}</td>
                     @else

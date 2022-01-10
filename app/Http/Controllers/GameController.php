@@ -9,7 +9,6 @@ use App\Models\Game;
 use App\Models\Rental;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use phpDocumentor\Reflection\Types\Array_;
 
 class GameController extends Controller
 {
@@ -29,6 +28,8 @@ class GameController extends Controller
 
     public function store(GameRequest $request)
     {
+        $a = "['karciana', 'strategiczna', 'imprezowa']";
+
         $game = new Game();
         $game->name = $request->name;
         $game->description = $request->description;
@@ -39,7 +40,7 @@ class GameController extends Controller
         $game->max_players = $request->max_players;
         $game->min_time = $request->min_time;
         $game->max_time = $request->max_time;
-        $game->categories = json_encode(['karciana', 'strategiczna', 'imprezowa']);
+        $game->categories = $a;
         $game->available = true;
         $game->save();
 

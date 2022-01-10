@@ -8,6 +8,7 @@ use App\Http\Requests\TournamentRequest;
 use App\Models\Game;
 use App\Models\Tournament;
 use App\Models\TournamentAttendant;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -17,9 +18,11 @@ class TournamentController extends Controller
     public function index(): View
     {
         $tournaments = Tournament::query()->get();
+        $carbon = new Carbon();
 
         return view("tournaments.index", [
             "tournaments" => $tournaments,
+            "carbon" => $carbon,
         ]);
     }
 

@@ -28,4 +28,26 @@ class TournamentAttendant extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getTournamentName()
+    {
+        return Tournament::query()->where("id", $this->tournament_id)->value("name");
+    }
+
+    public function getGameName()
+    {
+        $gameId = Tournament::query()->where("id", $this->tournament_id)->value("game_id");
+
+        return Game::query()->where("id", $gameId)->value("name");
+    }
+
+    public function getTournamentTime()
+    {
+        return Tournament::query()->where("id", $this->tournament_id)->value("time");
+    }
+
+    public function getTournamentDate()
+    {
+        return Tournament::query()->where("id", $this->tournament_id)->value("date");
+    }
 }

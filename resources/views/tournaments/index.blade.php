@@ -5,13 +5,13 @@
 
     <h3>Najbliższe turnieje:</h3>
     <br>
-    @if (!Auth::user() == null)
+    @auth
         @if (Auth::user()->admin == true)
             <a class="btn btn-success" href={{url("add","tournament")}}>Dodaj turniej</a>
             <br>
             <br>
         @endif
-    @endif
+    @endauth
     <div class="table-responsive">
         <table class="table table-bordered table-light">
             <thead>
@@ -28,17 +28,17 @@
             <tbody>
             @foreach($tournaments as $tournament)
                 <tr>
-                    <td>{{ $tournament['name'] }}</td>
-                    <td>{{ \App\Models\Game::query()->where("id",$tournament['game_id'])->value("name")}}</td>
-                    <td>{{ $tournament['date'] }}</td>
-                    <td>{{ $tournament['time'] }}</td>
-                    <td>{{ $tournament['current_players'] }}</td>
-                    <td>{{ $tournament['max_players'] }}</td>
+                    <td>{{ $tournament->name }}</td>
+                    <td>{{ $tournament->getGameName() }}</td>
+                    <td>{{ $carbon->parse($tournament->date)->format("d.m.Y") }}</td>
+                    <td>{{ $carbon->parse($tournament->time)->format("H:i") }}</td>
+                    <td>{{ $tournament->current_players }}</td>
+                    <td>{{ $tournament->max_players }}</td>
                     <td>
                         <div class="d-flex gap-2">
                             <a class="btn btn-primary" href="/games/{{$tournament->id}}">Więcej</a>
-                            @if (!Auth::user() == null)
-                                @if ($tournament['current_players'] < $tournament['max_players'] && !$tournament->checkIfJoined($tournament['id']))
+                            @auth
+                                @if ($tournament->current_players < $tournament->max_players && !$tournament->checkIfJoined($tournament->id))
                                     <form method="post" action="{{route("join.tournament", $tournament->id)}}">
                                         @csrf
                                         <button type="submit" class="btn btn-success">Dołącz</button>
@@ -50,7 +50,7 @@
                                         <button type="submit" class="btn btn-danger">Usuń</button>
                                     </form>
                                 @endif
-                            @endif
+                            @endauth
                         </div>
                 </tr>
             @endforeach

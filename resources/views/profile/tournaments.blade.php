@@ -13,10 +13,10 @@
             <tbody>
             @foreach($attendants as $attendant)
                 <tr>
-                    <td>{{\App\Models\Tournament::query()->where("id",$attendant->tournament_id)->value("name") }}</td>
-                    <td>{{\App\Models\Game::query()->where("id",\App\Models\Tournament::query()->where("id",$attendant->tournament_id)->value("game_id"))->value("name") }}</td>
-                    <td>{{\App\Models\Tournament::query()->where("id",$attendant->tournament_id)->value("time") }}</td>
-                    <td>{{\App\Models\Tournament::query()->where("id",$attendant->tournament_id)->value("date") }}</td>
+                    <td>{{$attendant->getTournamentName() }}</td>
+                    <td>{{$attendant->getGameName() }}</td>
+                    <td>{{$carbon->parse($attendant->getTournamentTime())->format("H:i") }}</td>
+                    <td>{{$carbon->parse($attendant->getTournamentDate())->format("d.m.Y") }}</td>
 
                     <td>
                         <div class="d-flex gap-2">

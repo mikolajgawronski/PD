@@ -22,7 +22,7 @@
             <tbody>
             @foreach($rooms as $room)
                 <tr>
-                    <td>{{ \App\Models\Game::query()->where("id",$room->game_id)->value("name")}}</td>
+                    <td>{{ $room->getGameName()}}</td>
                     <td>{{ $carbon->parse($room->time)->format('H:i') }}</td>
                     <td>{{ $room->current_players }} / {{ $room->max_players }}</td>
                     <td>
