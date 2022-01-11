@@ -5,6 +5,15 @@
 
     <h3>Nasze gry:</h3>
     <br>
+
+
+    <form method="get" action="{{route("filter.game")}}">
+        <input type="checkbox" id="is_economic" name="is_economic">
+        <label for="is_economic">Ekonomiczna</label>
+        <button type="submit" class="btn btn-primary">Filtruj</button>
+    </form>
+
+
     @auth
         @if (Auth::user()->admin == true)
         <a class="btn btn-success" href={{url("add","game")}}>Dodaj grę</a>
@@ -33,7 +42,7 @@
                     <td>{{ $game->box }}</td>
                     <td>{{ $game->min_players }}-{{ $game->max_players }}</td>
                     <td>{{ $game->min_time }}-{{ $game->max_time }} minut</td>
-                    <td>{{ $game->categories }}</td>
+                    <td>{{ $game->getCategories()}}</td>
                     <td>{{ $game->rating_bgg }}</td>
                     <td>{{ $game->complexity_bgg }}</td>
                     <td>

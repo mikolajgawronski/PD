@@ -11,6 +11,7 @@
                 <th scope="col">Karton</th>
                 <th scope="col">Ilość Graczy</th>
                 <th scope="col">Czas Gry</th>
+                <th scope="col">Kategorie</th>
                 <th scope="col">Ocena wg BGG</th>
                 <th scope="col">Złożoność wg BGG</th>
             </tr>
@@ -20,6 +21,7 @@
                     <td>{{ $game->box }}</td>
                     <td>{{ $game->min_players }}-{{ $game->max_players }}</td>
                     <td>{{ $game->min_time }}-{{ $game->max_time }} minut</td>
+                    <td>{{ $game->getCategories() }}</td>
                     <td>{{ $game->rating_bgg }}</td>
                     <td>{{ $game->complexity_bgg }}</td>
                 </tr>

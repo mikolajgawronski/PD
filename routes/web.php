@@ -52,6 +52,7 @@ $router->prefix("meetings")->group(function (Router $router): void {
 
 $router->prefix("games")->group(function (Router $router): void {
     $router->get("", [GameController::class, "index"]);
+    $router->get("filter", [GameController::class, "filter"])->name("filter.game");
     $router->get("{id}", [GameController::class, "show"]);
     $router->post("{id}", [GameController::class, "destroy"])->name("delete.game");
     $router->post("borrow/{id}", [GameController::class, "borrow"])->name("borrow.game");

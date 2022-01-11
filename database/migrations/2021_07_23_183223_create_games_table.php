@@ -24,7 +24,9 @@ class CreateGamesTable extends Migration
             $table->integer("max_players");
             $table->integer("min_time");
             $table->integer("max_time");
-            $table->string("categories");
+            $table->unsignedBigInteger("categories_id");
+            $table->foreign("categories_id")->references("id")->on("categories")
+                ->onDelete("cascade");
             $table->boolean("available");
         });
     }

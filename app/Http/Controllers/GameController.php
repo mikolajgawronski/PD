@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GameRequest;
+use App\Models\Categories;
 use App\Models\Game;
 use App\Models\Rental;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -21,6 +23,23 @@ class GameController extends Controller
         ]);
     }
 
+    public function filter(Request $request): View
+    {
+        if ($request->is_economic === "on") {
+            //dd($request);
+
+            $games = Game::query()->whereHas("categories", fn($query) => $query->where("is_economic", "=", 1))->get();
+        }
+
+//        dd($games = Game::query()->get(), 'nie');
+//
+//        $games = Game::query()->get();
+
+        return view("games.index", [
+            "games" => $games,
+        ]);
+    }
+
     public function create(): View
     {
         return view("games.create");
@@ -28,7 +47,8 @@ class GameController extends Controller
 
     public function store(GameRequest $request)
     {
-        $a = "['karciana', 'strategiczna', 'imprezowa']";
+        $categories = new Categories();
+        $categories->createFromRequest($request);
 
         $game = new Game();
         $game->name = $request->name;
@@ -40,7 +60,7 @@ class GameController extends Controller
         $game->max_players = $request->max_players;
         $game->min_time = $request->min_time;
         $game->max_time = $request->max_time;
-        $game->categories = $a;
+        $game->categories_id = $categories->id;
         $game->available = true;
         $game->save();
 

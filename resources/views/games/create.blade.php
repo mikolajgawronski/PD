@@ -47,8 +47,37 @@
                 <label for="name">Maksymalna ilość czasu:</label>
                 <input type="number" class="form-control" id="max_time" name="max_time" placeholder=60>
             </div>
-
         </div>
+
+        <div class="col">
+            <br>
+            <label for="name">Kategorie:</label>
+            <br>
+            <input type="checkbox" id="is_strategic" name="is_strategic">
+            <label for="is_strategic">Strategiczna</label>
+            <br>
+            <input type="checkbox" id="is_for_children" name="is_for_children">
+            <label for="is_for_children">Dla dzieci</label>
+            <br>
+            <input type="checkbox" id="is_for_families" name="is_for_families">
+            <label for="is_for_families">Rodzinna</label>
+            <br>
+            <input type="checkbox" id="is_economic" name="is_economic">
+            <label for="is_economic">Ekonomiczna</label>
+            <br>
+            <input type="checkbox" id="is_coop" name="is_coop">
+            <label for="is_coop">Kooperacyjna</label>
+            <br>
+            <input type="checkbox" id="is_party" name="is_party">
+            <label for="is_party">Imprezowa</label>
+            <br>
+            <input type="checkbox" id="is_euro" name="is_euro">
+            <label for="is_euro">Euro</label>
+            <br>
+            <input type="checkbox" id="is_ameritrash" name="is_ameritrash">
+            <label for="is_ameritrash">Ameritrash</label>
+        </div>
+
         <br>
         <button type="submit" class="btn btn-success">Dodaj</button>
     </form>
