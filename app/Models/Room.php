@@ -40,9 +40,9 @@ class Room extends Model
         return $this->hasMany(PlayerList::class);
     }
 
-    public function getGameName(): void
+    public function getGameName()
     {
-        Game::query()->where("id", $this->game_id)->value("name");
+        return Game::query()->where("id", $this->game_id)->value("name");
     }
 
     public function checkIfJoined($id): bool
