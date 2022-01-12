@@ -19,6 +19,16 @@ class Rental extends Model
         "user_id",
     ];
 
+    public function getGameName()
+    {
+        return Game::query()->where("id", $this->game_id)->value("name");
+    }
+
+    public function getUserName()
+    {
+        return User::query()->where("id", $this->user_id)->value("username");
+    }
+
     public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class);

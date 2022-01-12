@@ -17,8 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string("title");
             $table->string("body");
-            $table->date("date");
-            $table->time("time");
+            $table->datetime("datetime");
         });
     }
 

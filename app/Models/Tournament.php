@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class Tournament extends Model
 {
@@ -31,5 +32,24 @@ class Tournament extends Model
     public function tournamentAttendants(): HasMany
     {
         return $this->hasMany(TournamentAttendant::class);
+    }
+
+    public function checkIfJoined($id): bool
+    {
+        $attendants = TournamentAttendant::query()->get();
+        $userID = Auth::user()->id;
+
+        foreach ($attendants as $attendant) {
+            if ($attendant["user_id"] === $userID && $attendant["tournament_id"] === $id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getGameName()
+    {
+        return Game::query()->where("id", $this->game_id)->value("name");
     }
 }
