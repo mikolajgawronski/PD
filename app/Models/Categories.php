@@ -26,6 +26,9 @@ class Categories extends Model
         if ($request->is_economic === "on") {
             $this->is_economic = 1;
         }
+        if ($request->is_card === "on") {
+            $this->is_card = 1;
+        }
         if ($request->is_coop === "on") {
             $this->is_coop = 1;
         }

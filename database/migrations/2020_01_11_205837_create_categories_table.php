@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->boolean("is_for_children")->nullable();
             $table->boolean("is_for_families")->nullable();
             $table->boolean("is_economic")->nullable();
+            $table->boolean("is_card")->nullable();
             $table->boolean("is_coop")->nullable();
             $table->boolean("is_party")->nullable();
             $table->boolean("is_euro")->nullable();

@@ -5,6 +5,11 @@
         <h1>{{$game->name}}</h1>
         <h5>{{$game->description}}</h5>
         <br>
+
+        @if($game->photo != null)
+        <img src="/storage/{{$game->photo}}">
+        @endif
+
         <table class="table table-bordered table-light">
             <thead>
             <tr>
