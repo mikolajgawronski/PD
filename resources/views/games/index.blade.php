@@ -95,13 +95,13 @@
                     <td>
                         <div class="d-flex gap-2">
                             <a class="btn btn-primary" href="/games/{{$game->id}}">Więcej</a>
-                            @if ($game->available == true)
-                                <form method="post" action="{{route("borrow.game", $game->id)}}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success">Wypożycz</button>
-                                </form>
-                            @endif
                             @auth
+                                @if ($game->available == true)
+                                    <form method="post" action="{{route("borrow.game", $game->id)}}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success">Wypożycz</button>
+                                    </form>
+                                @endif
                                 @if (Auth::user()->admin == true)
                                     <form method="post" action="{{route("delete.game", $game->id)}}">
                                         @csrf
