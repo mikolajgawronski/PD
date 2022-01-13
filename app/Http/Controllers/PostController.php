@@ -41,9 +41,11 @@ class PostController extends Controller
     public function show($id): View
     {
         $post = Post::query()->findOrFail($id);
+        $carbon = new Carbon();
 
         return view("posts.show", [
             "post" => $post,
+            "carbon" => $carbon
         ]);
     }
 
