@@ -15,15 +15,7 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create("categories", function (Blueprint $table): void {
             $table->id();
-            $table->boolean("is_strategic")->nullable();
-            $table->boolean("is_for_children")->nullable();
-            $table->boolean("is_for_families")->nullable();
-            $table->boolean("is_economic")->nullable();
-            $table->boolean("is_card")->nullable();
-            $table->boolean("is_coop")->nullable();
-            $table->boolean("is_party")->nullable();
-            $table->boolean("is_euro")->nullable();
-            $table->boolean("is_ameritrash")->nullable();
+            $table->string("name");
             $table->timestamps();
         });
     }

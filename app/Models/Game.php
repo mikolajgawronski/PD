@@ -41,6 +41,11 @@ class Game extends Model
         return $this->hasMany(Rental::class);
     }
 
+    public function gameCategories(): HasMany
+    {
+        return $this->hasMany(GameCategory::class);
+    }
+
     public function categories(): BelongsTo
     {
         return $this->BelongsTo(Categories::class);
@@ -48,33 +53,13 @@ class Game extends Model
 
     public function getCategories()
     {
-        $categories = Categories::query()->findOrFail($this->categories_id);
+        $gameCategories = GameCategory::query()->where("game_id", "=", $this->id)->get();
 
         $value = [];
 
-        if ($categories->is_strategic !== null) {
-            array_push($value, "Strategiczna");
-        }
-        if ($categories->is_for_children !== null) {
-            array_push($value, "Dla dzieci");
-        }
-        if ($categories->is_for_families !== null) {
-            array_push($value, "Rodzinna");
-        }
-        if ($categories->is_economic !== null) {
-            array_push($value, "Ekonomiczna");
-        }
-        if ($categories->is_coop !== null) {
-            array_push($value, "Kooperacyjna");
-        }
-        if ($categories->is_party !== null) {
-            array_push($value, "Imprezowa");
-        }
-        if ($categories->is_euro !== null) {
-            array_push($value, "Euro");
-        }
-        if ($categories->is_ameritrash !== null) {
-            array_push($value, "Ameritrash");
+        foreach ($gameCategories as $gameCategory) {
+            $category = Categories::query()->findOrFail($gameCategory->category_id);
+            array_push($value, $category->name);
         }
 
         return implode(", ", $value);
