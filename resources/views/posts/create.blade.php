@@ -10,12 +10,12 @@
         <div class="row align-items-center">
              <div class="col">
                 <div>
-                    <div class="form-group" >
+                    <div class="form-group">
                         <label for="name">Tytuł posta:</label>
                         <input type="text" class="form-control" id="title" name="title">
                         <br>
                         <label for="name">Treść posta:</label>
-                        <input type="text" class="form-control" id="body" name="body">
+                        <textarea class="form-control" id="body" name="body" style="height: 200px"></textarea>
                     </div>
                 </div>
             </div>
