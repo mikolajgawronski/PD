@@ -56,13 +56,14 @@
     </div>
         <br>
         <button type="submit" class="btn btn-primary">Filtruj</button>
+        <br>
+        <br>
 
     </form>
 
 
     @auth
         @if (Auth::user()->admin == true)
-        <br>
         <a class="btn btn-success" href={{url("add","game")}}>Dodaj grę</a>
         <br>
         <br>
