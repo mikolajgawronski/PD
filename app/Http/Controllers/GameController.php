@@ -29,8 +29,7 @@ class GameController extends Controller
         $games = Game::query()->orderBy("name")->get();
         $filters = $this->createFilters($request);
 
-        switch ($request)
-        {
+        switch ($request) {
             case $request->name !== null:
                 $games = $games->toQuery()->where("name", "LIKE", "%{$request->name}%")->get(); break;
 
@@ -38,9 +37,8 @@ class GameController extends Controller
                 $games = $games->toQuery()->where("min_players", "<=", $request->players)->where("max_players", ">=", $request->players)->get(); break;
         }
 
-        foreach ($filters as $filter)
-        {
-            $categoryId = Categories::query()->where("name", "=", "$filter")->value("id");
+        foreach ($filters as $filter) {
+            $categoryId = Categories::query()->where("name", "=", "${filter}")->value("id");
 
             $games = $games->toQuery()->whereHas("gameCategories", fn($query) => $query->where("category_id", "=", $categoryId))->orderBy("name")->get();
         }
@@ -114,8 +112,7 @@ class GameController extends Controller
     {
         $filters = [];
 
-        switch ($request)
-        {
+        switch ($request) {
             case $request->is_strategic === "on":
                 array_push($filters, "Strategiczna"); break;
 
