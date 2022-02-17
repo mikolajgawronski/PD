@@ -12,7 +12,6 @@ use App\Models\Rental;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use PhpParser\Node\Expr\Array_;
 
 class GameController extends Controller
 {
@@ -30,12 +29,13 @@ class GameController extends Controller
         $games = Game::query()->orderBy("name")->get();
         $filters = $this->createFilters($request);
 
-        if ($request->name !== null) {
-            $games = $games->toQuery()->where("name", "LIKE", "%{$request->name}%")->get();
-        }
+        switch ($request)
+        {
+            case $request->name !== null:
+                $games = $games->toQuery()->where("name", "LIKE", "%{$request->name}%")->get(); break;
 
-        if ($request->players !== null) {
-            $games = $games->toQuery()->where("min_players", "<=", $request->players)->where("max_players", ">=", $request->players)->get();
+            case $request->players !== null:
+                $games = $games->toQuery()->where("min_players", "<=", $request->players)->where("max_players", ">=", $request->players)->get(); break;
         }
 
         foreach ($filters as $filter)
@@ -114,7 +114,8 @@ class GameController extends Controller
     {
         $filters = [];
 
-        switch ($request){
+        switch ($request)
+        {
             case $request->is_strategic === "on":
                 array_push($filters, "Strategiczna"); break;
 
