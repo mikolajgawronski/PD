@@ -110,7 +110,7 @@ class GameController extends Controller
         return redirect("/games")->with("message", "Pomyślnie wypożyczono grę.");
     }
 
-    public function createFilters($request): array
+    private function createFilters($request): array
     {
         $filters = [];
 
