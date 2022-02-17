@@ -12,6 +12,7 @@ use App\Models\Rental;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use PhpParser\Node\Expr\Array_;
 
 class GameController extends Controller
 {
@@ -26,52 +27,23 @@ class GameController extends Controller
 
     public function filter(Request $request): View
     {
-        $games = Game::query()->get();
+        $games = Game::query()->orderBy("name")->get();
+        $filters = $this->createFilters($request);
 
         if ($request->name !== null) {
             $games = $games->toQuery()->where("name", "LIKE", "%{$request->name}%")->get();
         }
+
         if ($request->players !== null) {
             $games = $games->toQuery()->where("min_players", "<=", $request->players)->where("max_players", ">=", $request->players)->get();
         }
-        if ($request->is_strategic === "on") {
-            $categoryId = Categories::query()->where("name", "=", "Strategiczna")->value("id");
-            $games = $games->toQuery()->whereHas("gameCategories", fn($query) => $query->where("category_id", "=", $categoryId))->get();
-        }
-        if ($request->is_for_children === "on") {
-            $categoryId = Categories::query()->where("name", "=", "Dla dzieci")->value("id");
-            $games = $games->toQuery()->whereHas("gameCategories", fn($query) => $query->where("category_id", "=", $categoryId))->get();
-        }
-        if ($request->is_for_families === "on") {
-            $categoryId = Categories::query()->where("name", "=", "Rodzinna")->value("id");
-            $games = $games->toQuery()->whereHas("gameCategories", fn($query) => $query->where("category_id", "=", $categoryId))->get();
-        }
-        if ($request->is_economic === "on") {
-            $categoryId = Categories::query()->where("name", "=", "Ekonomiczna")->value("id");
-            $games = $games->toQuery()->whereHas("gameCategories", fn($query) => $query->where("category_id", "=", $categoryId))->get();
-        }
-        if ($request->is_card === "on") {
-            $categoryId = Categories::query()->where("name", "=", "Karciana")->value("id");
-            $games = $games->toQuery()->whereHas("gameCategories", fn($query) => $query->where("category_id", "=", $categoryId))->get();
-        }
-        if ($request->is_coop === "on") {
-            $categoryId = Categories::query()->where("name", "=", "Kooperacyjna")->value("id");
-            $games = $games->toQuery()->whereHas("gameCategories", fn($query) => $query->where("category_id", "=", $categoryId))->get();
-        }
-        if ($request->is_party === "on") {
-            $categoryId = Categories::query()->where("name", "=", "Imprezowa")->value("id");
-            $games = $games->toQuery()->whereHas("gameCategories", fn($query) => $query->where("category_id", "=", $categoryId))->get();
-        }
-        if ($request->is_euro === "on") {
-            $categoryId = Categories::query()->where("name", "=", "Euro")->value("id");
-            $games = $games->toQuery()->whereHas("gameCategories", fn($query) => $query->where("category_id", "=", $categoryId))->get();
-        }
-        if ($request->is_ameritrash === "on") {
-            $categoryId = Categories::query()->where("name", "=", "Ameritrash")->value("id");
-            $games = $games->toQuery()->whereHas("gameCategories", fn($query) => $query->where("category_id", "=", $categoryId))->get();
-        }
 
-        $games = $games->toQuery()->orderBy("name")->get();
+        foreach ($filters as $filter)
+        {
+            $categoryId = Categories::query()->where("name", "=", "$filter")->value("id");
+
+            $games = $games->toQuery()->whereHas("gameCategories", fn($query) => $query->where("category_id", "=", $categoryId))->orderBy("name")->get();
+        }
 
         return view("games.index", [
             "games" => $games,
@@ -116,16 +88,6 @@ class GameController extends Controller
         ]);
     }
 
-    public function edit($id): void
-    {
-        //
-    }
-
-    public function update(Request $request, $id): void
-    {
-        //
-    }
-
     public function destroy($id)
     {
         Game::query()->findOrFail($id)->delete();
@@ -146,5 +108,42 @@ class GameController extends Controller
         $rental->save();
 
         return redirect("/games")->with("message", "Pomyślnie wypożyczono grę.");
+    }
+
+    public function createFilters($request): array
+    {
+        $filters = [];
+
+        switch ($request){
+            case $request->is_strategic === "on":
+                array_push($filters, "Strategiczna"); break;
+
+            case $request->is_for_children === "on":
+                array_push($filters, "Dla dzieci"); break;
+
+            case $request->is_for_families === "on":
+                array_push($filters, "Rodzinna"); break;
+
+            case $request->is_economic === "on":
+                array_push($filters, "Ekonomiczna"); break;
+
+            case $request->is_card === "on":
+                array_push($filters, "Karciana"); break;
+
+            case $request->is_coop === "on":
+                array_push($filters, "Kooperacyjna"); break;
+
+            case $request->is_party === "on":
+                array_push($filters, "Imprezowa"); break;
+
+            case $request->is_euro === "on":
+                array_push($filters, "Euro"); break;
+
+            case $request->is_ameritrash === "on":
+                array_push($filters, "Ameritrash"); break;
+
+        }
+
+        return $filters;
     }
 }
